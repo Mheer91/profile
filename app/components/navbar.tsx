@@ -115,25 +115,23 @@ export default function NavBar({ children }: Props) {
         {
             title: "LCV Merch",
             icon: <ShopIcon />,
-            href: "/merch"
+            href: "/merch/"
         },
         {
             title: "About LCV",
             icon: <AccountBoxSharpIcon />,
-            href: "/about-lcv"
+            href: "/about-lcv/"
         },
         {
             title: "Contact Us",
             icon: <MailSharpIcon />,
-            href: "/contact-us"
+            href: "/contact-us/"
         },
         {
             title: "Join LCV",
             icon: <GroupAddIcon />,
-            href: "/join-lcv"
+            href: "/join-lcv/"
         }];
-
-    const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
     const variants = {
         open: {
