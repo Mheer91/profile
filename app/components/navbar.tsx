@@ -192,8 +192,8 @@ export default function NavBar({ children }: Props) {
                         open={profileOpen}
                         onClose={handleClose}
                         onClick={handleClose}
-                        // transformOrigin={{ horizontal: "left", vertical: "top" }}
-                        // anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+                        transformOrigin={{ horizontal: "right", vertical: "top" }}
+                        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                     >
                         <MenuItem onClick={handleClose}>
                             <Avatar /> My account
