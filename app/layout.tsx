@@ -6,8 +6,8 @@ import Providers from "./components/providers";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Michael Heer',
-  description: 'Portfolio',
+  title: 'Lake County Veterans',
+  description: 'Lake Country Veterans',
 }
 
 
@@ -21,8 +21,8 @@ export default function RootLayout({
         <Providers>
             <body className={inter.className}>
                 <NavBar>
-                    {children}
                 </NavBar>
+                {children}
             </body>
         </Providers>
     </html>

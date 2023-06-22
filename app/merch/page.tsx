@@ -1,9 +1,9 @@
-export default function ContactMe() {
+export default function Merch() {
 
     return (
         <>
             <div>
-                Contact Me
+                Merch
             </div>
         </>
     )

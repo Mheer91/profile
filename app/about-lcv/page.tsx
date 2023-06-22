@@ -1,9 +1,9 @@
-export default function Portfolio() {
+export default function AboutLCV() {
 
     return (
         <>
             <div>
-                Portfolio
+                About LCV
             </div>
         </>
     )

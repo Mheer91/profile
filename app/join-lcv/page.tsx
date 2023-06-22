@@ -1,9 +1,9 @@
-export default function AboutMe() {
+export default function JoinLCV() {
 
     return (
         <>
             <div>
-                About Me
+                Join LCV
             </div>
         </>
     )

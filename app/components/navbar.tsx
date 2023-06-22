@@ -13,16 +13,17 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import {AccountCircle, ChevronLeft, ChevronRight, Logout, PersonAdd, Settings} from "@mui/icons-material";
 import MailSharpIcon from "@mui/icons-material/MailSharp";
-import FolderSharpIcon from "@mui/icons-material/FolderSharp";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import {useEffect, useState} from "react";
 import { motion } from "framer-motion";
-import {styled, useTheme} from "@mui/material";
+import {Avatar, Menu, MenuItem, styled, Tooltip, Typography, useTheme} from "@mui/material";
 import {useRouter} from "next/navigation";
+import ShopIcon from "@mui/icons-material/Shop";
+import HomeIcon from "@mui/icons-material/Home";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
 
 
 const drawerWidth = 240;
@@ -31,18 +32,18 @@ const MotionListItem = motion(ListItem);
 const MotionList = motion(List);
 const MotionDrawer = motion(Drawer);
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
+const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
     open?: boolean;
 }>(({ theme, open }) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: `-${drawerWidth}px`,
     ...(open && {
-        transition: theme.transitions.create('margin', {
+        transition: theme.transitions.create("margin", {
             easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.enteringScreen,
         }),
@@ -55,29 +56,28 @@ interface AppBarProps extends MuiAppBarProps {
 }
 
 const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
+    shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
     ...(open && {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: `${drawerWidth}px`,
-        transition: theme.transitions.create(['margin', 'width'], {
+        transition: theme.transitions.create(["margin", "width"], {
             easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.enteringScreen,
         }),
     }),
 }));
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
+const DrawerHeader = styled("div")(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
 }));
 
 type Props = {
@@ -89,31 +89,51 @@ export default function NavBar({ children }: Props) {
     const router = useRouter();
     const theme = useTheme();
     const [open, setOpen] = useState<boolean>(false);
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [profileOpen, setProfileOpen] = useState<boolean>(false);
     const handleDrawerToggle = () => {
         setOpen(!open);
+    };
+
+    const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
+        // setAnchorEl(event.currentTarget);
+        // !anchorEl ? setAnchorEl(event.currentTarget) : setAnchorEl(null);
+        setProfileOpen(!profileOpen);
+    };
+
+    const handleClose = () => {
+        // setAnchorEl(null);
+        setProfileOpen(false);
     };
 
     const pages = [
         {
             title: "Home",
-            icon: <FolderSharpIcon />,
-            href: '/'
+            icon: <HomeIcon />,
+            href: "/"
         },
         {
-            title: "Portfolio",
-            icon: <FolderSharpIcon />,
-            href: '/portfolio'
+            title: "LCV Merch",
+            icon: <ShopIcon />,
+            href: "/merch"
         },
         {
-            title: "About Me",
+            title: "About LCV",
             icon: <AccountBoxSharpIcon />,
-            href: '/about-me'
+            href: "/about-lcv"
         },
         {
-            title: "Contact Me",
+            title: "Contact Us",
             icon: <MailSharpIcon />,
-            href: '/contact-me'
+            href: "/contact-us"
+        },
+        {
+            title: "Join LCV",
+            icon: <GroupAddIcon />,
+            href: "/join-lcv"
         }];
+
+    const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
     const variants = {
         open: {
@@ -142,7 +162,7 @@ export default function NavBar({ children }: Props) {
     };
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: "flex" }}>
             <CssBaseline />
             <AppBar position="fixed" open={open}>
                 <Toolbar>
@@ -151,22 +171,64 @@ export default function NavBar({ children }: Props) {
                         aria-label="open drawer"
                         onClick={handleDrawerToggle}
                         edge="start"
-                        sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                        sx={{ mr: 2, ...(open && { display: "none" }) }}
                     >
                         <MenuIcon />
                     </IconButton>
-                    {/*<Typography variant="h6" noWrap component="div">*/}
-                    {/*    Michael Heer*/}
-                    {/*</Typography>*/}
+                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1}}>
+                        Lake County Veterans
+                    </Typography>
+                    <IconButton
+                        onClick={handleOpen}
+                        size="small"
+                        sx={{ ml: 2 }}
+                        aria-controls={profileOpen ? 'dad' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={profileOpen ? 'true' : undefined}
+                    >
+                        <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                    </IconButton>
+                    <Menu
+                        anchorEl={anchorEl}
+                        id="dad"
+                        open={profileOpen}
+                        onClose={handleClose}
+                        onClick={handleClose}
+                        // transformOrigin={{ horizontal: "left", vertical: "top" }}
+                        // anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+                    >
+                        <MenuItem onClick={handleClose}>
+                            <Avatar /> My account
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                            <ListItemIcon>
+                                <PersonAdd fontSize="small" />
+                            </ListItemIcon>
+                            Add another account
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                            <ListItemIcon>
+                                <Settings fontSize="small" />
+                            </ListItemIcon>
+                            Settings
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem onClick={handleClose}>
+                            <ListItemIcon>
+                                <Logout fontSize="small" />
+                            </ListItemIcon>
+                            Logout
+                        </MenuItem>
+                    </Menu>
                 </Toolbar>
             </AppBar>
             <MotionDrawer
                 sx={{
                     width: drawerWidth,
                     flexShrink: 0,
-                    '& .MuiDrawer-paper': {
+                    "& .MuiDrawer-paper": {
                         width: drawerWidth,
-                        boxSizing: 'border-box',
+                        boxSizing: "border-box",
                     },
                 }}
                 animate={open ? "open" : "closed"}
@@ -176,7 +238,7 @@ export default function NavBar({ children }: Props) {
             >
                 <DrawerHeader>
                     <IconButton onClick={handleDrawerToggle}>
-                        {theme.direction === 'ltr' ? <ChevronLeft /> : <ChevronRight />}
+                        {theme.direction === "ltr" ? <ChevronLeft /> : <ChevronRight />}
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
@@ -199,7 +261,7 @@ export default function NavBar({ children }: Props) {
             </MotionDrawer>
             <Main open={open}>
                 <DrawerHeader />
-                {children}
+                {/*{children}*/}
             </Main>
         </Box>
     );
