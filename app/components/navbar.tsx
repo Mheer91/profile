@@ -96,13 +96,12 @@ export default function NavBar({ children }: Props) {
     };
 
     const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
-        // setAnchorEl(event.currentTarget);
-        // !anchorEl ? setAnchorEl(event.currentTarget) : setAnchorEl(null);
+        !anchorEl ? setAnchorEl(event.currentTarget) : setAnchorEl(null);
         setProfileOpen(!profileOpen);
     };
 
     const handleClose = () => {
-        // setAnchorEl(null);
+        setAnchorEl(null);
         setProfileOpen(false);
     };
 
