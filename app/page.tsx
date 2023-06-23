@@ -3,89 +3,51 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import {classes} from "../util/std";
-import {Paper} from "@mui/material";
+import {Grid, Paper, styled} from "@mui/material";
 import lcv_lg from "../assets/svg/lcv-lg.svg"
+import Box from "@mui/material/Box";
+import {ReactNode} from "react";
+
+const Item = styled('div')(({ theme }) => ({
+    backgroundColor: 'blue',
+    border: '1px solid',
+    borderColor: theme.palette.mode === 'dark' ? 'orange' : '#ced7e0',
+    padding: theme.spacing(1),
+    borderRadius: '4px',
+    textAlign: 'center',
+}));
+
 
 export default function Home() {
   return (
-    <main className={classes([styles.main, 'default'])}>
-
-      <div className={styles.description}>
-        {/*<p>*/}
-        {/*  Copyright Cortogonia Web LLC. 2023*/}
-        {/*</p>*/}
-        <Image src={lcv_lg} alt={'LCV Large Logo'} />
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-
-        {/*<div className={styles.description}>*/}
-        {/*    <p>*/}
-        {/*        Copyright Cortogonia Web LLC. 2023*/}
-        {/*    </p>*/}
+    <Grid container xs={12}>
+        {/*<Box sx={{*/}
+        {/*    display: 'flex',*/}
+        {/*    justifyContent: 'center'*/}
+        {/*}}>*/}
         {/*    <Image src={lcv_lg} alt={'LCV Large Logo'} />*/}
-        {/*</div>*/}
-    </main>
+        {/*</Box>*/}
+        <Grid xs={6} md={8} sx={{
+            display: 'flex',
+            justifyContent: 'center'
+        }}>
+            <Image src={lcv_lg} alt={'LCV Large Logo'} />
+        </Grid>
+        <Grid xs={6} md={4}>
+            <Item>xs=6 md=4</Item>
+        </Grid>
+        {/*<Grid xs={6} md={4}>*/}
+        {/*    <Item>xs=6 md=4</Item>*/}
+        {/*</Grid>*/}
+        {/*<Grid xs={6} md={8}>*/}
+        {/*    <Item>xs=6 md=8</Item>*/}
+        {/*</Grid>*/}
+        <Grid xs={12} sx={{
+            display: 'flex',
+            justifyContent: 'flex-end'
+        }}>
+            <Image src={lcv_lg} alt={'LCV Large Logo'} />
+        </Grid>
+    </Grid>
   )
 }

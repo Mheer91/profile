@@ -1,14 +1,10 @@
 "use client";
 
 import * as React from "react";
-import AppBar, {AppBarProps as MuiAppBarProps} from "@mui/material/AppBar";
+import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -24,77 +20,20 @@ import {
     Shop, MailSharp, AccountBoxSharp
 } from "@mui/icons-material";
 import Toolbar from "@mui/material/Toolbar";
-import {useEffect, useState} from "react";
-import {motion} from "framer-motion";
-import {Avatar, Button, Link, Menu, MenuItem, styled, Tooltip, Typography, useTheme} from "@mui/material";
+import { useState} from "react";
+import { Button, Typography, useTheme, styled } from "@mui/material";
 import {useRouter} from "next/navigation";
 import lcv_sm from "../../assets/svg/lcv-sm.svg";
-import no_lcv from "../../assets/svg/no-lcv.svg";
 import Image from "next/image";
-import { Orbitron } from "next/font/google";
-
-const orbitron = Orbitron({ subsets: ['latin'] , weight: '700' });
+import {MotionBox, MotionDivider, MotionDrawer, MotionList, MotionListItem} from "../../util/framerMUI";
 
 
 const drawerWidth = 240;
 
-const MotionListItem = motion(ListItem);
-const MotionList = motion(List);
-const MotionDrawer = motion(Drawer);
-const MotionDivider = motion(Divider);
-const MotionBox = motion(Box);
-const MotionTypography = motion(Typography);
 
-
-// const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
-//     open?: boolean;
-// }>(({ theme, open }) => ({
-//     // flexGrow: 1,
-//     // padding: theme.spacing(3),
-//     // transition: theme.transitions.create("margin", {
-//     //     easing: theme.transitions.easing.sharp,
-//     //     duration: theme.transitions.duration.leavingScreen,
-//     // }),
-//     // marginLeft: `-${drawerWidth}px`,
-//     // ...(open && {
-//     //     transition: theme.transitions.create("margin", {
-//     //         easing: theme.transitions.easing.easeOut,
-//     //         duration: theme.transitions.duration.enteringScreen,
-//     //     }),
-//     //     marginLeft: 0,
-//     // }),
-// }));
-
-// interface AppBarProps extends MuiAppBarProps {
-//     open?: boolean;
-// }
-
-// const AppBar = styled(MuiAppBar, {
-//     shouldForwardProp: (prop) => prop !== "open",
-// })<AppBarProps>(({ theme, open }) => ({
-//     transition: theme.transitions.create(["margin", "width"], {
-//         easing: theme.transitions.easing.sharp,
-//         duration: theme.transitions.duration.leavingScreen,
-//     }),
-//     ...(open && {
-//         width: `calc(100% - ${drawerWidth}px)`,
-//         marginLeft: `${drawerWidth}px`,
-//         transition: theme.transitions.create(["margin", "width"], {
-//             easing: theme.transitions.easing.easeOut,
-//             duration: theme.transitions.duration.enteringScreen,
-//         }),
-//     }),
-// }));
-
-// const DrawerHeader = styled("div")(({ theme }) => ({
-//     display: "flex",
-//     alignItems: "center",
-//     padding: theme.spacing(0, 1),
-//     ...theme.mixins.toolbar,
-//     justifyContent: "space-between",
-// }));
-
-// const MotionDrawerHeader = motion(DrawerHeader);
+const Main = styled('main')(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+}));
 
 type Props = {
     children: React.ReactNode
@@ -105,10 +44,6 @@ export default function NavBar({ children }: Props) {
     const router = useRouter();
     const theme = useTheme();
     const [open, setOpen] = useState<boolean>(false);
-    const handleDrawerToggle = () => {
-        setOpen(!open);
-    };
-
 
     const pages = [
         {
@@ -153,6 +88,10 @@ export default function NavBar({ children }: Props) {
             icon: <Logout />,
             href: "/join-lcv/"
         }];
+
+    const handleDrawerToggle = () => {
+        setOpen(!open);
+    };
 
     const variants = {
         open: {
@@ -215,18 +154,24 @@ export default function NavBar({ children }: Props) {
         <MotionList variants={variants}>
 
             {pages.map((page) => (
+
                 <>
 
                     <MotionListItem key={page.title} disablePadding variants={liVariants}>
+
                         <ListItemButton onClick={() => {
                             router.push(page.href);
                             setOpen(false);
                         }}>
+
                             <ListItemIcon>
                                 {page.icon}
                             </ListItemIcon>
+
                             <ListItemText primary={page.title}/>
+
                         </ListItemButton>
+
                     </MotionListItem>
 
                     {page.divider ? <MotionDivider variants={liVariants}/> : ''}
@@ -234,6 +179,7 @@ export default function NavBar({ children }: Props) {
                 </>
 
             ))}
+
         </MotionList>
 
     </>);
@@ -243,25 +189,32 @@ export default function NavBar({ children }: Props) {
             display: "flex",
             justifyContent: 'space-between',
         }}>
+
             <CssBaseline />
+
             <AppBar position="fixed">
+
                 <Toolbar sx={{
                     display: 'flex',
                     justifyContent: 'flex-end',
                     width: '100%'
                 }}>
+
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
                         onClick={handleDrawerToggle}
                         edge="start"
-                        sx={{ mr: 2, ...(open && { display: "none" }) }}
+                        sx={{
+                            mr: 2,
+                            ...(open && {
+                                display: "none"
+                            })
+                        }}
                     >
                         <MenuIcon />
                     </IconButton>
-                    {/*<Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end' }}>*/}
-                    {/*    <Image src={no_lcv} alt={'Logo without LCV'} />*/}
-                    {/*</Box>*/}
+
                     <Box
                         component="nav"
                         sx={{
@@ -275,22 +228,31 @@ export default function NavBar({ children }: Props) {
                         aria-label="mailbox folders"
                     >
 
+                        {/*Mobile Drawer*/}
                         <MotionDrawer
                             variant="temporary"
                             open={open}
                             onClose={handleDrawerToggle}
                             ModalProps={{
-                                keepMounted: true, // Better open performance on mobile.
+                                keepMounted: true,
                             }}
                             sx={{
-                                display: { xs: 'block', sm: 'none' },
-                                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                                display: {
+                                    xs: 'block',
+                                    sm: 'none'
+                                },
+                                '& .MuiDrawer-paper': {
+                                    boxSizing: 'border-box',
+                                    width: drawerWidth
+                                },
                             }}
                             animate={open ? "open" : "closed"}
                             initial={'closed'}
                         >
                             {drawer}
                         </MotionDrawer>
+
+                        {/*Desktop Drawer*/}
                         <MotionDrawer
                             variant="permanent"
                             sx={{
@@ -303,48 +265,56 @@ export default function NavBar({ children }: Props) {
                         >
                             {drawer}
                         </MotionDrawer>
+
                     </Box>
+
                     <MotionBox sx={{
                         display: 'flex',
                         flexGrow: 1,
                         justifyContent: 'flex-end',
-                        // alignItems: 'end'
                     }}>
-                        {/*<Image src={no_lcv} alt={'Logo without LCV'} />*/}
-                        <Typography variant={'h6'} sx={{
-                            fontWeight: 700
+
+                        <Typography variant={'h6'} component={'button'} onClick={() => router.push('/')} sx={{
+                            fontWeight: 700,
+                            color: 'inherit'
                         }}>
                             Lake County Veterans
                         </Typography>
+
                     </MotionBox>
+
                 </Toolbar>
+
             </AppBar>
 
             <Box sx={{
-                flexGrow: {
-                    sm: 0,
-                    md: 1
-                },
-                padding: theme.spacing(3),
-                // transition: theme.transitions.create("margin", {
-                //     easing: theme.transitions.easing.sharp,
-                //     duration: theme.transitions.duration.leavingScreen,
-                // }),
+                flexGrow: 1,
                 paddingLeft: {
-                    sm: 0,
                     md: `-${drawerWidth}px`
                 },
+                margin: '5px',
+                height: '100vh'
             }}>
-                <MotionBox variants={liVariants} sx={{
+
+                <Box sx={{
                     display: "flex",
-                    // alignItems: "center",
                     padding: 1,
                     ...theme.mixins.toolbar,
                     justifyContent: "space-between",
                 }} />
-                {children}
+
+                <Main sx={{
+                    paddingLeft: {
+                        md: `${drawerWidth}px`
+                    }
+                }}>
+                    {children}
+                </Main>
+
             </Box>
+
         </Box>
+
     );
 
 }
