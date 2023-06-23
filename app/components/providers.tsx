@@ -8,9 +8,9 @@ const orbitron = Orbitron({ subsets: ['latin'] , weight: '700' });
 
 
 const theme1 = createTheme({
-    // typography: {
-    //     fontFamily: orbitron.className,
-    // },
+    typography: {
+        fontFamily: 'inherit',
+    },
     palette: {
         mode: 'dark',
         primary: {

@@ -5,7 +5,7 @@ import NavBar from "./components/navbar";
 import Providers from "./components/providers";
 import { Orbitron } from "next/font/google";
 
-const orbitron = Orbitron({ subsets: ['latin'] , weight: '700' });
+const orbitron = Orbitron({ subsets: ['latin'] , weight: '400' });
 
 // const kanit = Kanit({ subsets: ['latin'] , weight: '600' });
 

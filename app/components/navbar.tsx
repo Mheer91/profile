@@ -212,17 +212,20 @@ export default function NavBar({ children }: Props) {
 
         <MotionDivider variants={liVariants} />
 
-        <MotionList variants={variants} className={orbitron.className}>
+        <MotionList variants={variants}>
 
             {pages.map((page) => (
                 <>
 
                     <MotionListItem key={page.title} disablePadding variants={liVariants}>
-                        <ListItemButton onClick={() => router.push(page.href)}>
+                        <ListItemButton onClick={() => {
+                            router.push(page.href);
+                            setOpen(false);
+                        }}>
                             <ListItemIcon>
                                 {page.icon}
                             </ListItemIcon>
-                            <ListItemText primary={page.title} className={orbitron.className}/>
+                            <ListItemText primary={page.title}/>
                         </ListItemButton>
                     </MotionListItem>
 
@@ -236,13 +239,13 @@ export default function NavBar({ children }: Props) {
     </>);
 
     return (
-        <Box className={orbitron.className} sx={{
+        <Box sx={{
             display: "flex",
             justifyContent: 'space-between',
         }}>
             <CssBaseline />
-            <AppBar position="fixed" className={orbitron.className}>
-                <Toolbar className={orbitron.className} sx={{
+            <AppBar position="fixed">
+                <Toolbar sx={{
                     display: 'flex',
                     justifyContent: 'flex-end',
                     width: '100%'
@@ -270,7 +273,6 @@ export default function NavBar({ children }: Props) {
                             }
                         }}
                         aria-label="mailbox folders"
-                        className={orbitron.className}
                     >
 
                         <MotionDrawer
@@ -286,7 +288,6 @@ export default function NavBar({ children }: Props) {
                             }}
                             animate={open ? "open" : "closed"}
                             initial={'closed'}
-                            className={orbitron.className}
                         >
                             {drawer}
                         </MotionDrawer>
@@ -299,7 +300,6 @@ export default function NavBar({ children }: Props) {
                             open={true}
                             animate={'open'}
                             initial={'closed'}
-                            className={orbitron.className}
                         >
                             {drawer}
                         </MotionDrawer>
@@ -310,10 +310,12 @@ export default function NavBar({ children }: Props) {
                         justifyContent: 'flex-end',
                         // alignItems: 'end'
                     }}>
-                        <Typography variant={'h6'} className={orbitron.className}>
+                        {/*<Image src={no_lcv} alt={'Logo without LCV'} />*/}
+                        <Typography variant={'h6'} sx={{
+                            fontWeight: 700
+                        }}>
                             Lake County Veterans
                         </Typography>
-
                     </MotionBox>
                 </Toolbar>
             </AppBar>
