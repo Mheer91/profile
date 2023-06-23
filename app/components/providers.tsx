@@ -2,9 +2,15 @@
 
 import {createTheme, Theme, ThemeProvider} from "@mui/material";
 import {useState} from "react";
+import { Orbitron } from "next/font/google";
+
+const orbitron = Orbitron({ subsets: ['latin'] , weight: '700' });
 
 
 const theme1 = createTheme({
+    // typography: {
+    //     fontFamily: orbitron.className,
+    // },
     palette: {
         mode: 'dark',
         primary: {

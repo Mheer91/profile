@@ -1,28 +1,32 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+// import { Inter } from 'next/font/google'
+// import { Kanit } from "next/font/google";
 import NavBar from "./components/navbar";
 import Providers from "./components/providers";
+import { Orbitron } from "next/font/google";
 
-const inter = Inter({ subsets: ['latin'] })
+const orbitron = Orbitron({ subsets: ['latin'] , weight: '700' });
+
+// const kanit = Kanit({ subsets: ['latin'] , weight: '600' });
 
 export const metadata = {
   title: 'Lake County Veterans',
   description: 'Lake Country Veterans',
 }
 
-
+//TODO: FIgure out why font isn't working on the drawer
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={orbitron.className}>
         <Providers>
-            <body className={inter.className}>
+            <body>
                 <NavBar>
+                    {children}
                 </NavBar>
-                {children}
             </body>
         </Providers>
     </html>
