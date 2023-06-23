@@ -7,6 +7,8 @@ import {Grid, Paper, styled} from "@mui/material";
 import lcv_lg from "../assets/svg/lcv-lg.svg"
 import Box from "@mui/material/Box";
 import {ReactNode} from "react";
+import AnimatedText from "./components/animated_text";
+import {MotionGrid} from "../util/framerMUI";
 
 const Item = styled('div')(({ theme }) => ({
     backgroundColor: 'blue',
@@ -20,21 +22,25 @@ const Item = styled('div')(({ theme }) => ({
 
 export default function Home() {
   return (
-    <Grid container xs={12}>
+    <Grid container xs={12} spacing={1} sx={{}}>
+        <MotionGrid>
+
+        </MotionGrid>
         {/*<Box sx={{*/}
         {/*    display: 'flex',*/}
         {/*    justifyContent: 'center'*/}
         {/*}}>*/}
         {/*    <Image src={lcv_lg} alt={'LCV Large Logo'} />*/}
         {/*</Box>*/}
-        <Grid xs={6} md={8} sx={{
+        <Grid xs={12} md={8} sx={{
             display: 'flex',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            padding: '5px',
         }}>
             <Image src={lcv_lg} alt={'LCV Large Logo'} />
         </Grid>
-        <Grid xs={6} md={4}>
-            <Item>xs=6 md=4</Item>
+        <Grid xs={12} md={4}>
+            <AnimatedText text={'Lake County Veterans'} />
         </Grid>
         {/*<Grid xs={6} md={4}>*/}
         {/*    <Item>xs=6 md=4</Item>*/}

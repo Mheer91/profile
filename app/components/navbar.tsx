@@ -21,11 +21,12 @@ import {
 } from "@mui/icons-material";
 import Toolbar from "@mui/material/Toolbar";
 import { useState} from "react";
-import { Button, Typography, useTheme, styled } from "@mui/material";
+import {Button, Typography, useTheme, styled, Link} from "@mui/material";
 import {useRouter} from "next/navigation";
 import lcv_sm from "../../assets/svg/lcv-sm.svg";
 import Image from "next/image";
 import {MotionBox, MotionDivider, MotionDrawer, MotionList, MotionListItem} from "../../util/framerMUI";
+import AnimatedText from "./animated_text";
 
 
 const drawerWidth = 240;
@@ -274,12 +275,15 @@ export default function NavBar({ children }: Props) {
                         justifyContent: 'flex-end',
                     }}>
 
-                        <Typography variant={'h6'} component={'button'} onClick={() => router.push('/')} sx={{
+                        <Link variant={'h6'} component={'button'} onClick={() => router.push('/')} sx={{
                             fontWeight: 700,
-                            color: 'inherit'
+                            color: 'inherit',
+                            backgroundColor: 'inherit',
+                            border: 'none',
+                            textDecoration: 'none',
                         }}>
-                            Lake County Veterans
-                        </Typography>
+                            <AnimatedText text={'LAKE COUNTY VETERANS'} />
+                        </Link>
 
                     </MotionBox>
 
@@ -289,10 +293,7 @@ export default function NavBar({ children }: Props) {
 
             <Box sx={{
                 flexGrow: 1,
-                paddingLeft: {
-                    md: `-${drawerWidth}px`
-                },
-                margin: '5px',
+                padding: '5px',
                 height: '100vh'
             }}>
 
