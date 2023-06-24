@@ -1,10 +1,15 @@
+'use client';
+
 import Grid from '@mui/system/Unstable_Grid';
-import {MotionGrid} from "../../../util/framerMUI";
 import Image from "next/image";
 import lcv_lg from "../../../assets/svg/lcv-lg.svg";
 import AnimatedText from "../../components/animated_text";
+import {motion} from "framer-motion";
+
+const MotionGrid = motion(Grid);
 
 export default function Signup() {
+
     return (
         <Grid container xs={12} spacing={1} sx={{}}>
             <MotionGrid>

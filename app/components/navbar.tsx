@@ -26,8 +26,18 @@ import {Button, Typography, useTheme, styled, Link} from "@mui/material";
 import {useRouter} from "next/navigation";
 import lcv_sm from "../../assets/svg/lcv-sm.svg";
 import Image from "next/image";
-import {MotionBox, MotionDivider, MotionDrawer, MotionList, MotionListItem} from "../../util/framerMUI";
 import AnimatedText from "./animated_text";
+import {motion} from "framer-motion";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import Drawer from "@mui/material/Drawer";
+
+const MotionListItem = motion(ListItem);
+const MotionList = motion(List);
+const MotionDrawer = motion(Drawer);
+const MotionDivider = motion(Divider);
+const MotionBox = motion(Box);
 
 
 const drawerWidth = 240;

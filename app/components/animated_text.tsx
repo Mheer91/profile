@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import {MotionBox} from "../../util/framerMUI";
+import Box from "@mui/material/Box";
+
+const MotionBox = motion(Box);
 
 export default function AnimatedText(props: { text: string }) {
 

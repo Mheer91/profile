@@ -2,7 +2,6 @@
 
 import {Button } from "@mui/material";
 import Grid from '@mui/system/Unstable_Grid';
-import {MotionGrid} from "../../../util/framerMUI";
 import Image from "next/image";
 import lcv_lg from "../../../assets/svg/lcv-lg.svg";
 import AnimatedText from "../../components/animated_text";

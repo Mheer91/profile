@@ -9,7 +9,9 @@ import lcv_lg from "../assets/svg/lcv-lg.svg"
 import Box from "@mui/material/Box";
 import {ReactNode} from "react";
 import AnimatedText from "./components/animated_text";
-import {MotionGrid} from "../util/framerMUI";
+import {motion} from "framer-motion";
+
+const MotionGrid = motion(Grid);
 
 const Item = styled('div')(({ theme }) => ({
     backgroundColor: 'blue',
