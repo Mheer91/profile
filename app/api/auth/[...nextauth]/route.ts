@@ -9,12 +9,6 @@ const authOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-            // wellKnown: "https://accounts.google.com/.well-known/openid-configuration",
-            // authorization: {
-            //     params: {
-            //         scope: "openid email profile"
-            //     }
-            // },
         })
     ],
     pages: {

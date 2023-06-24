@@ -28,7 +28,7 @@ export default function Login() {
                 display: 'flex',
                 justifyContent: 'center'
             }}>
-                <Button variant="contained" onClick={() => signIn('Google')}>Google</Button>
+                <Button variant="contained" onClick={() => signIn('google')}>Google</Button>
             </Grid>
 
             {/*<Grid xs={12} sx={{*/}
