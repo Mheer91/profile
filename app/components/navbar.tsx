@@ -14,6 +14,7 @@ import {
     ChevronLeft,
     ChevronRight,
     Logout,
+    Login,
     PersonAdd,
     Settings,
     Home,
@@ -55,39 +56,39 @@ export default function NavBar({ children }: Props) {
         {
             title: "LCV Merch",
             icon: <Shop />,
-            href: "/merch/"
+            href: "/merch"
         },
         {
             title: "About LCV",
             icon: <AccountBoxSharp />,
-            href: "/about-lcv/"
+            href: "/about-lcv"
         },
         {
             title: "Contact Us",
             icon: <MailSharp />,
-            href: "/contact-us/"
+            href: "/contact-us"
         },
         {
             title: "Join LCV",
             icon: <PersonAdd />,
-            href: "/join-lcv/",
+            href: "/join-lcv",
             divider: true,
         },
         {
             title: "My Account",
             icon: <Person />,
-            href: "/join-lcv/"
+            href: "/join-lcv"
         },
         {
             title: "Settings",
             icon: <Settings />,
-            href: "/join-lcv/",
+            href: "/join-lcv",
             divider: true,
         },
         {
-            title: "Logout",
-            icon: <Logout />,
-            href: "/join-lcv/"
+            title: "Login",
+            icon: <Login />,
+            href: "/auth/login"
         }];
 
     const handleDrawerToggle = () => {
@@ -154,11 +155,11 @@ export default function NavBar({ children }: Props) {
 
         <MotionList variants={variants}>
 
-            {pages.map((page) => (
+            {pages.map((page, index) => (
 
-                <>
+                <Box key={`${page.title}`}>
 
-                    <MotionListItem key={page.title} disablePadding variants={liVariants}>
+                    <MotionListItem disablePadding variants={liVariants}>
 
                         <ListItemButton onClick={() => {
                             router.push(page.href);
@@ -177,7 +178,7 @@ export default function NavBar({ children }: Props) {
 
                     {page.divider ? <MotionDivider variants={liVariants}/> : ''}
 
-                </>
+                </Box>
 
             ))}
 
@@ -293,7 +294,7 @@ export default function NavBar({ children }: Props) {
 
             <Box sx={{
                 flexGrow: 1,
-                padding: '5px',
+                // padding: '5px',
                 height: '100vh'
             }}>
 
@@ -305,7 +306,8 @@ export default function NavBar({ children }: Props) {
                 }} />
 
                 <Main sx={{
-                    paddingLeft: {
+                    padding: '15px',
+                    marginLeft: {
                         md: `${drawerWidth}px`
                     }
                 }}>

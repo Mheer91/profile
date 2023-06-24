@@ -1,6 +1,4 @@
 import './globals.css'
-// import { Inter } from 'next/font/google'
-// import { Kanit } from "next/font/google";
 import NavBar from "./components/navbar";
 import Providers from "./components/providers";
 import { Orbitron } from "next/font/google";
@@ -14,7 +12,6 @@ export const metadata = {
   description: 'Lake Country Veterans',
 }
 
-//TODO: FIgure out why font isn't working on the drawer
 export default function RootLayout({
   children,
 }: {
@@ -22,13 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={orbitron.className}>
-        <Providers>
-            <body>
+        <body>
+            <Providers>
                 <NavBar>
                     {children}
                 </NavBar>
-            </body>
-        </Providers>
+            </Providers>
+        </body>
     </html>
   )
 }

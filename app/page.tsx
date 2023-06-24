@@ -3,7 +3,8 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import {classes} from "../util/std";
-import {Grid, Paper, styled} from "@mui/material";
+import { styled} from "@mui/material";
+import Grid from '@mui/system/Unstable_Grid';
 import lcv_lg from "../assets/svg/lcv-lg.svg"
 import Box from "@mui/material/Box";
 import {ReactNode} from "react";
