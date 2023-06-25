@@ -31,7 +31,7 @@ export default function ContentCard(props: cardProps) {
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    Check out Forehead and BloodRayne's latest clips!
+                    Check out Forehead and BloodRayne&apos;s latest clips!
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
