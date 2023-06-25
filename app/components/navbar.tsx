@@ -373,7 +373,7 @@ export default function NavBar({ children }: Props) {
                 }} />
 
                 <Main sx={{
-                    padding: '15px',
+                    padding: '10px',
                     marginLeft: {
                         md: `${drawerWidth}px`
                     }
