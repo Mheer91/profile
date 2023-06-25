@@ -123,7 +123,7 @@ export default function Home() {
             justifyContent: 'space-evenly',
         }}>
             <ContentCard title={'CLIPS'} />
-            <ContentCard title={'VOD&apos;s'} />
+            <ContentCard title={'VOD'} />
             <ContentCard title={'LIVE STREAMS'} />
             <ContentCard title={'dad'} />
             {/*<ContentCard />*/}
