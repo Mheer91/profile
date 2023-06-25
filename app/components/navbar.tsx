@@ -18,7 +18,11 @@ import {
     PersonAdd,
     Settings,
     Home,
-    Shop, MailSharp, AccountBoxSharp
+    Shop,
+    MailSharp,
+    AccountBoxSharp,
+    VideoLibrary,
+    Stream
 } from "@mui/icons-material";
 import Toolbar from "@mui/material/Toolbar";
 import { useState} from "react";
@@ -32,6 +36,7 @@ import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import Drawer from "@mui/material/Drawer";
+import {signOut, useSession} from "next-auth/react";
 
 const MotionListItem = motion(ListItem);
 const MotionList = motion(List);
@@ -53,6 +58,10 @@ type Props = {
 
 export default function NavBar({ children }: Props) {
 
+    const { data: session } = useSession();
+
+    console.log(session, 'sessions');
+
     const router = useRouter();
     const theme = useTheme();
     const [open, setOpen] = useState<boolean>(false);
@@ -61,45 +70,63 @@ export default function NavBar({ children }: Props) {
         {
             title: "Home",
             icon: <Home />,
-            href: "/"
+            onClick: () => router.push('/'),
         },
-        {
-            title: "LCV Merch",
-            icon: <Shop />,
-            href: "/merch"
-        },
+        // {
+        //     title: "LCV Merch",
+        //     icon: <Shop />,
+        //     onClick: () => router.push('/merch'),
+        // },
         {
             title: "About LCV",
             icon: <AccountBoxSharp />,
-            href: "/about-lcv"
+            onClick: () => router.push('/about-lcv'),
+        },
+        {
+            title: "Clips",
+            icon: <VideoLibrary />,
+            onClick: () => router.push('/clips'),
+        },
+        {
+            title: "Who's Live?",
+            icon: <Stream />,
+            onClick: () => router.push('/status'),
         },
         {
             title: "Contact Us",
             icon: <MailSharp />,
-            href: "/contact-us"
+            onClick: () => router.push('/contact-us'),
         },
         {
             title: "Join LCV",
             icon: <PersonAdd />,
-            href: "/join-lcv",
+            onClick: () => router.push('/join-lcv'),
             divider: true,
-        },
-        {
-            title: "My Account",
-            icon: <Person />,
-            href: "/join-lcv"
-        },
+        }
+    ];
+
+    const sessionPages = [
         {
             title: "Settings",
             icon: <Settings />,
-            href: "/join-lcv",
+            href: "/settings",
+            onClick: () => router.push('settings'),
             divider: true,
+            show: !!session,
         },
         {
             title: "Login",
             icon: <Login />,
-            href: "/auth/login"
-        }];
+            onClick: () => router.push('/auth/login'),
+            show: !session,
+        },
+        {
+            title: "Logout",
+            icon: <Logout />,
+            onClick: () => signOut(),
+            show: !!session,
+        }
+    ];
 
     const handleDrawerToggle = () => {
         setOpen(!open);
@@ -165,14 +192,44 @@ export default function NavBar({ children }: Props) {
 
         <MotionList variants={variants}>
 
-            {pages.map((page, index) => (
+            {pages.map((page) => (
 
                 <Box key={`${page.title}`}>
 
                     <MotionListItem disablePadding variants={liVariants}>
 
+                        {/*TODO: Refactor to Link & Href for SEO. Potentially add a 'type' portion to the page object and render link/button based on that type*/}
                         <ListItemButton onClick={() => {
-                            router.push(page.href);
+                            page.onClick();
+                            setOpen(false);
+                        }}>
+
+                            <ListItemIcon>
+                                {page.icon}
+                            </ListItemIcon>
+
+                            <ListItemText primary={page.title}/>
+
+                        </ListItemButton>
+
+                    </MotionListItem>
+
+                    {page.divider ? <MotionDivider variants={liVariants}/> : ''}
+
+                </Box>
+
+            ))}
+
+            {sessionPages.map((page) => (
+
+                <Box key={`${page.title}`} sx={{
+                    display: page.show ? 'block' : 'none'
+                }}>
+
+                    <MotionListItem disablePadding variants={liVariants}>
+
+                        <ListItemButton onClick={() => {
+                            page.onClick();
                             setOpen(false);
                         }}>
 

@@ -1,10 +1,8 @@
 import NextAuth, {NextAuthOptions} from "next-auth"
-import {NextApiRequest, NextApiResponse} from "next";
 import GoogleProvider from "next-auth/providers/google";
-import {NextRequest} from "next/server";
 
 
-const authOptions = {
+const authOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -13,6 +11,15 @@ const authOptions = {
     ],
     pages: {
         signIn: '/auth/login'
+    },
+    callbacks: {
+        async redirect({ url, baseUrl }) {
+
+            console.log(url, baseUrl)
+
+            return baseUrl;
+
+        }
     }
 }
 

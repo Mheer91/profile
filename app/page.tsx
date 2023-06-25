@@ -57,6 +57,14 @@ export default function Home() {
         }}>
             <Image src={lcv_lg} alt={'LCV Large Logo'} />
         </Grid>
+        <Grid>
+            <iframe
+                src="https://player.twitch.tv/?channel=ixbloodraynexi&parent=thelcv.com"
+                height="400px"
+                width="400px"
+                allowFullScreen>
+            </iframe>
+        </Grid>
     </Grid>
   )
 }
